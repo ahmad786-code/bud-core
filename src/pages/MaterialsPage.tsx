@@ -122,7 +122,7 @@ export const MaterialsPage: React.FC = () => {
               onChange={(e) => setSelectedProjectId(e.target.value)}
               className="px-2.5 py-1.5 bg-slate-50 border border-slate-200 rounded-lg text-xs font-semibold text-slate-800 focus:outline-none focus:border-amber-500"
             >
-              <option value="all">Wszystkie budowy</option>
+              <option value="all">Wszystkie budowy (4)</option>
               {projects.map((p) => (
                 <option key={p.id} value={p.id}>
                   {p.name}
@@ -202,36 +202,36 @@ export const MaterialsPage: React.FC = () => {
                     {material.projectName}
                   </td>
 
-                  <td className="py-3.5 px-4 text-right font-bold text-slate-900">
+                  <td className="py-3.5 px-4 text-right font-bold text-slate-900 whitespace-nowrap">
                     {material.currentStock} {material.unit}
                   </td>
 
-                  <td className="py-3.5 px-4 text-right text-slate-500 font-medium">
+                  <td className="py-3.5 px-4 text-right text-slate-500 font-medium whitespace-nowrap">
                     {material.minStock} {material.unit}
                   </td>
 
-                  <td className="py-3.5 px-4 text-right font-medium text-slate-700">
+                  <td className="py-3.5 px-4 text-right font-medium text-slate-700 whitespace-nowrap">
                     {formatCurrency(material.unitPrice)} / {material.unit}
                   </td>
 
-                  <td className="py-3.5 px-4 text-center">
+                  <td className="py-3.5 px-4 text-center whitespace-nowrap">
                     {material.isLowStock ? (
-                      <span className="inline-flex items-center gap-1 text-xs font-bold text-rose-700 bg-rose-50 border border-rose-200 px-2.5 py-0.5 rounded-full">
+                      <span className="inline-flex items-center gap-1 text-xs font-bold text-rose-700 bg-rose-50 border border-rose-200 px-2.5 py-0.5 rounded-full whitespace-nowrap">
                         <AlertTriangle className="w-3 h-3 text-rose-600" />
                         <span>Niski stan</span>
                       </span>
                     ) : (
-                      <span className="inline-flex items-center gap-1 text-xs font-medium text-emerald-700 bg-emerald-50 px-2.5 py-0.5 rounded-full">
+                      <span className="inline-flex items-center gap-1 text-xs font-medium text-emerald-700 bg-emerald-50 px-2.5 py-0.5 rounded-full whitespace-nowrap">
                         <CheckCircle2 className="w-3 h-3 text-emerald-600" />
                         <span>W normie</span>
                       </span>
                     )}
                   </td>
 
-                  <td className="py-3.5 px-4 text-right">
+                  <td className="py-3.5 px-4 text-right whitespace-nowrap">
                     <button
                       onClick={() => handleOrderClick(material)}
-                      className={`inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-bold transition-all cursor-pointer ${
+                      className={`inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-bold transition-all cursor-pointer whitespace-nowrap ${
                         material.isLowStock
                           ? 'bg-amber-500 hover:bg-amber-600 text-slate-950 shadow-xs'
                           : 'bg-slate-900 hover:bg-slate-800 text-white'

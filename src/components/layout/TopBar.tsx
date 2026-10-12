@@ -54,7 +54,7 @@ export const TopBar: React.FC<TopBarProps> = ({ onToggleSidebar }) => {
     if (location.pathname.startsWith('/projekty/')) {
       currentMeta = { title: 'Szczegóły projektu', breadcrumb: 'Projekty / Szczegóły' };
     } else {
-      currentMeta = { title: 'BudCore', breadcrumb: 'Pulpit' };
+      currentMeta = { title: 'Firma Budowlana Bartłomiej Kleczkowski', breadcrumb: 'Pulpit' };
     }
   }
 
@@ -83,8 +83,8 @@ export const TopBar: React.FC<TopBarProps> = ({ onToggleSidebar }) => {
 
         <div className="min-w-0">
           <div className="flex items-center gap-1.5 text-xs text-slate-500 font-medium">
-            <Link to="/" className="hover:text-amber-600 transition-colors">
-              BudCore
+            <Link to="/" className="hover:text-amber-600 transition-colors truncate" title="Firma Budowlana Bartłomiej Kleczkowski Szczecin">
+              FB Bartłomiej Kleczkowski
             </Link>
             <ChevronRight className="w-3.5 h-3.5 text-slate-400 shrink-0" />
             <span className="text-slate-700 truncate">{currentMeta.breadcrumb}</span>

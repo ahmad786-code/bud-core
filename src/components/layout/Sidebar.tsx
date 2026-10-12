@@ -77,19 +77,19 @@ export const Sidebar: React.FC<SidebarProps> = ({ isOpen, onClose }) => {
         {/* Brand Header */}
         <div className="flex items-center justify-between px-5 py-4 border-b border-slate-800">
           <div className="flex items-center gap-3">
-            <div className="w-10 h-10 rounded-xl bg-gradient-to-tr from-amber-600 to-amber-500 flex items-center justify-center text-white shadow-md shadow-amber-500/20">
+            <div className="w-10 h-10 rounded-xl bg-gradient-to-tr from-amber-600 to-amber-500 flex items-center justify-center text-white shadow-md shadow-amber-500/20 shrink-0">
               <HardHat className="w-6 h-6 stroke-[2.2]" />
             </div>
-            <div>
+            <div className="min-w-0">
               <div className="flex items-center gap-1.5">
-                <span className="font-extrabold text-xl tracking-tight text-white font-sans">
-                  Bud<span className="text-amber-500">Core</span>
+                <span className="font-extrabold text-sm tracking-tight text-white font-sans truncate">
+                  FB B. Kleczkowski
                 </span>
-                <span className="text-[10px] font-bold px-1.5 py-0.5 rounded bg-amber-500/20 text-amber-400 border border-amber-500/30">
+                <span className="text-[10px] font-bold px-1.5 py-0.5 rounded bg-amber-500/20 text-amber-400 border border-amber-500/30 shrink-0">
                   PRO
                 </span>
               </div>
-              <p className="text-[11px] text-slate-400 font-medium">Nadzór i Zarządzanie Budową</p>
+              <p className="text-[11px] text-slate-400 font-medium truncate">Szczecin • Nadzór budowlany</p>
             </div>
           </div>
           <button
@@ -169,14 +169,16 @@ export const Sidebar: React.FC<SidebarProps> = ({ isOpen, onClose }) => {
 
           {/* Company card as requested */}
           <div className="flex items-center gap-3 p-2 rounded-lg bg-slate-900/60 border border-slate-800/60">
-            <div className="w-8 h-8 rounded-lg bg-slate-800 text-amber-400 flex items-center justify-center font-bold text-xs border border-slate-700">
-              BC
+            <div className="w-8 h-8 rounded-lg bg-slate-800 text-amber-400 flex items-center justify-center font-bold text-xs border border-slate-700 shrink-0">
+              BK
             </div>
             <div className="flex-1 min-w-0">
-              <p className="text-xs font-semibold text-white truncate">BudCore Sp. z o.o.</p>
+              <p className="text-xs font-semibold text-white truncate" title="Firma Budowlana Bartłomiej Kleczkowski Szczecin">
+                FB Bartłomiej Kleczkowski
+              </p>
               <div className="flex items-center gap-1 text-[11px] text-amber-400/90">
-                <ShieldCheck className="w-3 h-3" />
-                <span>Administrator</span>
+                <ShieldCheck className="w-3 h-3 shrink-0" />
+                <span className="truncate">Szczecin • Administrator</span>
               </div>
             </div>
           </div>

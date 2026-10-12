@@ -19,7 +19,14 @@ import {
   ExternalLink,
 } from 'lucide-react';
 import { useBudCore } from '../context/BudCoreContext';
-import { formatCurrency, formatDate } from '../utils/formatters';
+import {
+  formatCurrency,
+  formatDate,
+  formatPlural,
+  PLURAL_PERSONS,
+  PLURAL_EXPENSES,
+  PLURAL_MATERIALS,
+} from '../utils/formatters';
 import { StatusBadge, PriorityBadge } from '../components/common/StatusBadge';
 import { TaskStatus } from '../types';
 
@@ -359,7 +366,7 @@ export const ProjectDetailPage: React.FC = () => {
                 </div>
                 <p className="text-xs text-slate-600 line-clamp-2">{rep.workCompleted}</p>
                 <div className="flex items-center justify-between pt-2 border-t border-slate-200 text-xs text-slate-500">
-                  <span>Załoga: {rep.workersOnSite + rep.subcontractorsOnSite} osób</span>
+                  <span>Załoga: {formatPlural(rep.workersOnSite + rep.subcontractorsOnSite, PLURAL_PERSONS)}</span>
                   <button
                     onClick={() => setSelectedDailyReport(rep)}
                     className="font-bold text-amber-600 hover:text-amber-700 cursor-pointer"
@@ -377,7 +384,7 @@ export const ProjectDetailPage: React.FC = () => {
       {activeTab === 'Pracownicy' && (
         <div className="bg-white rounded-xl border border-slate-200 shadow-xs p-6 space-y-4">
           <h3 className="text-base font-bold text-slate-900">
-            Załoga przypisana do budowy ({projectWorkers.length} osób)
+            Załoga przypisana do budowy ({formatPlural(projectWorkers.length, PLURAL_PERSONS)})
           </h3>
           <div className="overflow-x-auto">
             <table className="w-full text-left text-xs sm:text-sm">
@@ -386,8 +393,8 @@ export const ProjectDetailPage: React.FC = () => {
                   <th className="py-2.5 px-3">Pracownik</th>
                   <th className="py-2.5 px-3">Zawód</th>
                   <th className="py-2.5 px-3">Telefon</th>
-                  <th className="py-2.5 px-3 text-right">Stawka</th>
-                  <th className="py-2.5 px-3 text-center">Dzisiejsza obecność</th>
+                  <th className="py-2.5 px-3 text-right whitespace-nowrap">Stawka</th>
+                  <th className="py-2.5 px-3 text-center whitespace-nowrap">Dzisiejsza obecność</th>
                 </tr>
               </thead>
               <tbody className="divide-y divide-slate-100">
@@ -395,12 +402,12 @@ export const ProjectDetailPage: React.FC = () => {
                   <tr key={w.id} className="hover:bg-slate-50">
                     <td className="py-3 px-3 font-bold text-slate-900">{w.name}</td>
                     <td className="py-3 px-3 capitalize text-slate-700">{w.trade}</td>
-                    <td className="py-3 px-3 text-slate-500">{w.phone}</td>
-                    <td className="py-3 px-3 text-right font-semibold">{w.hourlyRate} zł/h</td>
-                    <td className="py-3 px-3 text-center">
+                    <td className="py-3 px-3 text-slate-500 font-mono text-xs">{w.phone}</td>
+                    <td className="py-3 px-3 text-right font-semibold whitespace-nowrap">{w.hourlyRate} zł/h</td>
+                    <td className="py-3 px-3 text-center whitespace-nowrap">
                       <button
                         onClick={() => toggleWorkerAttendance(w.id)}
-                        className={`px-3 py-1 rounded-full text-xs font-bold transition-all cursor-pointer ${
+                        className={`px-3 py-1 rounded-full text-xs font-bold transition-all cursor-pointer whitespace-nowrap ${
                           w.presentToday
                             ? 'bg-emerald-100 text-emerald-800 hover:bg-emerald-200'
                             : 'bg-rose-100 text-rose-800 hover:bg-rose-200'
@@ -442,10 +449,10 @@ export const ProjectDetailPage: React.FC = () => {
                 <tr>
                   <th className="py-2.5 px-3">Materiał</th>
                   <th className="py-2.5 px-3">Kategoria</th>
-                  <th className="py-2.5 px-3 text-right">Stan obecny</th>
-                  <th className="py-2.5 px-3 text-right">Minimum</th>
-                  <th className="py-2.5 px-3 text-center">Status</th>
-                  <th className="py-2.5 px-3 text-right">Akcja</th>
+                  <th className="py-2.5 px-3 text-right whitespace-nowrap">Stan obecny</th>
+                  <th className="py-2.5 px-3 text-right whitespace-nowrap">Minimum</th>
+                  <th className="py-2.5 px-3 text-center whitespace-nowrap">Status</th>
+                  <th className="py-2.5 px-3 text-right whitespace-nowrap">Akcja</th>
                 </tr>
               </thead>
               <tbody className="divide-y divide-slate-100">
@@ -453,30 +460,30 @@ export const ProjectDetailPage: React.FC = () => {
                   <tr key={m.id} className="hover:bg-slate-50">
                     <td className="py-3 px-3 font-bold text-slate-900">{m.name}</td>
                     <td className="py-3 px-3 text-slate-600">{m.category}</td>
-                    <td className="py-3 px-3 text-right font-bold text-slate-900">
+                    <td className="py-3 px-3 text-right font-bold text-slate-900 whitespace-nowrap">
                       {m.currentStock} {m.unit}
                     </td>
-                    <td className="py-3 px-3 text-right text-slate-500">
+                    <td className="py-3 px-3 text-right text-slate-500 whitespace-nowrap">
                       {m.minStock} {m.unit}
                     </td>
-                    <td className="py-3 px-3 text-center">
+                    <td className="py-3 px-3 text-center whitespace-nowrap">
                       {m.isLowStock ? (
-                        <span className="text-xs font-bold text-rose-700 bg-rose-50 px-2 py-0.5 rounded border border-rose-200">
+                        <span className="text-xs font-bold text-rose-700 bg-rose-50 px-2 py-0.5 rounded border border-rose-200 whitespace-nowrap">
                           Niski stan!
                         </span>
                       ) : (
-                        <span className="text-xs font-medium text-emerald-700 bg-emerald-50 px-2 py-0.5 rounded">
+                        <span className="text-xs font-medium text-emerald-700 bg-emerald-50 px-2 py-0.5 rounded whitespace-nowrap">
                           Wystarczający
                         </span>
                       )}
                     </td>
-                    <td className="py-3 px-3 text-right">
+                    <td className="py-3 px-3 text-right whitespace-nowrap">
                       <button
                         onClick={() => {
                           setSelectedMaterialForOrder(m);
                           setIsOrderModalOpen(true);
                         }}
-                        className="px-2.5 py-1 bg-slate-900 hover:bg-amber-500 hover:text-slate-950 text-white font-semibold text-xs rounded-md transition-colors cursor-pointer"
+                        className="px-2.5 py-1 bg-slate-900 hover:bg-amber-500 hover:text-slate-950 text-white font-semibold text-xs rounded-md transition-colors cursor-pointer whitespace-nowrap"
                       >
                         Zamów
                       </button>
@@ -495,18 +502,18 @@ export const ProjectDetailPage: React.FC = () => {
           <div className="flex items-center justify-between">
             <div>
               <h3 className="text-base font-bold text-slate-900">
-                Wydatki i faktury na tej budowie ({projectExpenses.length})
+                Wydatki i faktury na tej budowie ({formatPlural(projectExpenses.length, PLURAL_EXPENSES)})
               </h3>
               <p className="text-xs text-slate-500">
                 Łącznie poniesiono:{' '}
-                <strong className="text-slate-800">
+                <strong className="text-slate-800 whitespace-nowrap">
                   {formatCurrency(projectExpenses.reduce((acc, e) => acc + e.amount, 0))}
                 </strong>
               </p>
             </div>
             <button
               onClick={() => setIsExpenseModalOpen(true)}
-              className="flex items-center gap-1.5 px-3 py-1.5 bg-amber-500 hover:bg-amber-600 text-slate-950 font-bold text-xs rounded-lg cursor-pointer"
+              className="flex items-center gap-1.5 px-3 py-1.5 bg-amber-500 hover:bg-amber-600 text-slate-950 font-bold text-xs rounded-lg cursor-pointer whitespace-nowrap"
             >
               <Plus className="w-3.5 h-3.5" />
               <span>Dodaj wydatek</span>
@@ -521,8 +528,8 @@ export const ProjectDetailPage: React.FC = () => {
                   <th className="py-2.5 px-3">Kategoria</th>
                   <th className="py-2.5 px-3">Wystawca / Kontrahent</th>
                   <th className="py-2.5 px-3">Nr faktury</th>
-                  <th className="py-2.5 px-3 text-right">Kwota</th>
-                  <th className="py-2.5 px-3 text-center">Status</th>
+                  <th className="py-2.5 px-3 text-right whitespace-nowrap">Kwota</th>
+                  <th className="py-2.5 px-3 text-center whitespace-nowrap">Status</th>
                 </tr>
               </thead>
               <tbody className="divide-y divide-slate-100">
@@ -531,12 +538,12 @@ export const ProjectDetailPage: React.FC = () => {
                     <td className="py-3 px-3 font-bold text-slate-900">{exp.title}</td>
                     <td className="py-3 px-3 text-slate-600">{exp.category}</td>
                     <td className="py-3 px-3 text-slate-700">{exp.contractor}</td>
-                    <td className="py-3 px-3 text-slate-500">{exp.invoiceNumber}</td>
-                    <td className="py-3 px-3 text-right font-bold text-slate-900">
+                    <td className="py-3 px-3 text-slate-500 font-mono text-xs whitespace-nowrap">{exp.invoiceNumber}</td>
+                    <td className="py-3 px-3 text-right font-bold text-slate-900 whitespace-nowrap">
                       {formatCurrency(exp.amount)}
                     </td>
-                    <td className="py-3 px-3 text-center">
-                      <span className="text-xs px-2 py-0.5 rounded font-medium bg-slate-100 text-slate-800">
+                    <td className="py-3 px-3 text-center whitespace-nowrap">
+                      <span className="text-xs px-2 py-0.5 rounded font-medium bg-slate-100 text-slate-800 whitespace-nowrap">
                         {exp.status}
                       </span>
                     </td>

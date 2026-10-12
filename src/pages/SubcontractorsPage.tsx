@@ -106,7 +106,7 @@ export const SubcontractorsPage: React.FC = () => {
                     <p className="text-xs font-semibold text-amber-600 mt-0.5">{sub.trade}</p>
                   </div>
                   <span
-                    className={`text-[11px] font-bold px-2 py-0.5 rounded ${
+                    className={`text-[11px] font-bold px-2 py-0.5 rounded whitespace-nowrap ${
                       sub.status === 'W realizacji'
                         ? 'bg-blue-100 text-blue-800'
                         : 'bg-emerald-100 text-emerald-800'
@@ -123,7 +123,7 @@ export const SubcontractorsPage: React.FC = () => {
                   </div>
                   <div className="flex items-center gap-1.5">
                     <Phone className="w-3.5 h-3.5 text-slate-400 shrink-0" />
-                    <span>
+                    <span className="whitespace-nowrap">
                       {sub.contactPerson} ({sub.phone})
                     </span>
                   </div>
@@ -137,12 +137,12 @@ export const SubcontractorsPage: React.FC = () => {
               {/* Financial Progress */}
               <div className="p-3 bg-slate-50 rounded-xl border border-slate-100 space-y-2">
                 <div className="flex justify-between text-xs">
-                  <span className="text-slate-500">Wartość umowy:</span>
-                  <strong className="text-slate-900">{formatCurrency(sub.contractValue)}</strong>
+                  <span className="text-slate-500 whitespace-nowrap">Wartość umowy:</span>
+                  <strong className="text-slate-900 whitespace-nowrap">{formatCurrency(sub.contractValue)}</strong>
                 </div>
                 <div className="flex justify-between text-xs">
-                  <span className="text-slate-500">Zafakturowano:</span>
-                  <span className="font-bold text-emerald-700">{formatCurrency(sub.invoicedAmount)}</span>
+                  <span className="text-slate-500 whitespace-nowrap">Zafakturowano:</span>
+                  <span className="font-bold text-emerald-700 whitespace-nowrap">{formatCurrency(sub.invoicedAmount)}</span>
                 </div>
                 <div className="w-full bg-slate-200 h-1.5 rounded-full overflow-hidden">
                   <div

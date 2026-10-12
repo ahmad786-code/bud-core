@@ -104,7 +104,7 @@ export const TasksPage: React.FC = () => {
               onChange={(e) => setSelectedProjectId(e.target.value)}
               className="px-2.5 py-1.5 bg-slate-50 border border-slate-200 rounded-lg text-xs font-semibold text-slate-800 focus:outline-none focus:border-amber-500"
             >
-              <option value="all">Wszystkie budowy</option>
+              <option value="all">Wszystkie budowy (4)</option>
               {projects.map((p) => (
                 <option key={p.id} value={p.id}>
                   {p.name}

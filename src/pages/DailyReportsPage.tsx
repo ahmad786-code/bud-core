@@ -4,7 +4,6 @@ import {
   Search,
   Filter,
   Plus,
-  CloudSun,
   Users,
   AlertTriangle,
   ShieldCheck,
@@ -14,7 +13,13 @@ import {
   Calendar,
 } from 'lucide-react';
 import { useBudCore } from '../context/BudCoreContext';
-import { formatDate } from '../utils/formatters';
+import {
+  formatDate,
+  formatPlural,
+  PLURAL_PHOTOS,
+  PLURAL_PERSONS,
+} from '../utils/formatters';
+import { WeatherIcon } from '../components/common/WeatherBadge';
 
 export const DailyReportsPage: React.FC = () => {
   const {
@@ -79,7 +84,7 @@ export const DailyReportsPage: React.FC = () => {
             onChange={(e) => setSelectedProjectId(e.target.value)}
             className="px-3 py-1.5 bg-slate-50 border border-slate-200 rounded-lg text-xs font-semibold text-slate-800 focus:bg-white focus:outline-none focus:border-amber-500"
           >
-            <option value="all">Wszystkie budowy ({dailyReports.length})</option>
+            <option value="all">Wszystkie budowy (4)</option>
             {projects.map((p) => (
               <option key={p.id} value={p.id}>
                 {p.name}
@@ -128,7 +133,7 @@ export const DailyReportsPage: React.FC = () => {
                 </div>
 
                 <div className="flex items-center gap-1.5 px-2.5 py-1 rounded-md bg-slate-100 text-slate-700 text-xs font-medium shrink-0">
-                  <CloudSun className="w-4 h-4 text-amber-500" />
+                  <WeatherIcon condition={report.weather.condition} className="w-4 h-4" />
                   <span>
                     {report.weather.condition}, {report.weather.temp}°C
                   </span>
@@ -139,14 +144,14 @@ export const DailyReportsPage: React.FC = () => {
               <div className="flex items-center gap-2 text-xs text-slate-600 bg-slate-50 p-2.5 rounded-lg border border-slate-100">
                 <Users className="w-4 h-4 text-slate-500 shrink-0" />
                 <span>
-                  Pracownicy BudCore: <strong className="text-slate-900">{report.workersOnSite}</strong>
+                  Pracownicy FB Bartłomiej Kleczkowski: <strong className="text-slate-900">{report.workersOnSite}</strong>
                 </span>
                 <span className="text-slate-300">|</span>
                 <span>
                   Podwykonawcy: <strong className="text-slate-900">{report.subcontractorsOnSite}</strong>
                 </span>
                 <span className="ml-auto text-slate-400 font-semibold">
-                  Suma: {report.workersOnSite + report.subcontractorsOnSite} osób
+                  Suma: {formatPlural(report.workersOnSite + report.subcontractorsOnSite, PLURAL_PERSONS)}
                 </span>
               </div>
             </div>
@@ -159,9 +164,11 @@ export const DailyReportsPage: React.FC = () => {
                   <Check className="w-3.5 h-3.5 text-emerald-600" />
                   Wykonane prace
                 </span>
-                <p className="line-clamp-3 leading-relaxed text-slate-600 bg-slate-50/60 p-2.5 rounded-lg border border-slate-100">
-                  {report.workCompleted}
-                </p>
+                <div className="bg-slate-50/60 p-2.5 rounded-lg border border-slate-100 overflow-hidden">
+                  <p className="line-clamp-3 leading-relaxed text-slate-600">
+                    {report.workCompleted}
+                  </p>
+                </div>
               </div>
 
               {/* BHP */}
@@ -187,7 +194,7 @@ export const DailyReportsPage: React.FC = () => {
             <div className="p-4 px-5 bg-slate-50 border-t border-slate-100 flex items-center justify-between text-xs">
               <span className="text-slate-500 flex items-center gap-1.5 font-medium">
                 <Image className="w-3.5 h-3.5 text-slate-400" />
-                {report.photoCount} załączonych zdjęć
+                {formatPlural(report.photoCount, PLURAL_PHOTOS)}
               </span>
 
               <button

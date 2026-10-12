@@ -13,7 +13,7 @@ export const StatusBadge: React.FC<StatusBadgeProps> = ({ status, size = 'sm' })
 
   return (
     <span
-      className={`inline-flex items-center gap-1.5 font-medium rounded-md border ${config.bgColor} ${config.textColor} ${config.borderColor} ${sizeClasses}`}
+      className={`inline-flex items-center gap-1.5 font-medium rounded-md border whitespace-nowrap shrink-0 ${config.bgColor} ${config.textColor} ${config.borderColor} ${sizeClasses}`}
     >
       <span className={`w-1.5 h-1.5 rounded-full ${config.dotColor}`} />
       <span>{config.label}</span>
@@ -30,7 +30,7 @@ export const PriorityBadge: React.FC<PriorityBadgeProps> = ({ priority }) => {
 
   return (
     <span
-      className={`inline-flex items-center text-xs font-medium px-2 py-0.5 rounded border ${config.badge}`}
+      className={`inline-flex items-center text-xs font-medium px-2 py-0.5 rounded border whitespace-nowrap shrink-0 ${config.badge}`}
     >
       {config.label}
     </span>
@@ -46,7 +46,7 @@ export const OrderStatusBadge: React.FC<OrderStatusBadgeProps> = ({ status }) =>
 
   return (
     <span
-      className={`inline-flex items-center gap-1.5 text-xs font-medium px-2.5 py-1 rounded-md border ${config.badge}`}
+      className={`inline-flex items-center gap-1.5 text-xs font-medium px-2.5 py-1 rounded-md border whitespace-nowrap shrink-0 ${config.badge}`}
     >
       <span className={`w-1.5 h-1.5 rounded-full ${config.dot}`} />
       <span>{config.label}</span>

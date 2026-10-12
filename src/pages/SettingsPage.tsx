@@ -15,12 +15,12 @@ import { useBudCore } from '../context/BudCoreContext';
 export const SettingsPage: React.FC = () => {
   const { showToast } = useBudCore();
 
-  const [companyName, setCompanyName] = useState('BudCore Sp. z o.o.');
-  const [nip, setNip] = useState('525-28-94-112');
+  const [companyName, setCompanyName] = useState('Firma Budowlana Bartłomiej Kleczkowski');
+  const [nip, setNip] = useState('851-29-84-320');
   const [regon, setRegon] = useState('382910482');
-  const [address, setAddress] = useState('Al. Jerozolimskie 142B, 02-305 Warszawa');
-  const [email, setEmail] = useState('biuro@budcore-zarzadzanie.pl');
-  const [phone, setPhone] = useState('+48 22 590 12 00');
+  const [address, setAddress] = useState('ul. Heyki 18, 70-631 Szczecin');
+  const [email, setEmail] = useState('biuro@kleczkowski-budownictwo.pl');
+  const [phone, setPhone] = useState('+48 91 480 32 10');
   const [defaultCurrency, setDefaultCurrency] = useState('PLN');
   const [emailAlerts, setEmailAlerts] = useState(true);
   const [lowStockAlerts, setLowStockAlerts] = useState(true);
@@ -39,7 +39,7 @@ export const SettingsPage: React.FC = () => {
           Ustawienia profilu i konfiguracja firmy
         </h2>
         <p className="text-xs sm:text-sm text-slate-500 mt-0.5">
-          Zarządzaj danymi rejestrowymi BudCore, powiadomieniami oraz regułami operacyjnymi
+          Zarządzaj danymi rejestrowymi Firma Budowlana Bartłomiej Kleczkowski Szczecin, powiadomieniami oraz regułami operacyjnymi
         </p>
       </div>
 

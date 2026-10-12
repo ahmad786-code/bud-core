@@ -13,6 +13,7 @@ import {
   UserCheck,
 } from 'lucide-react';
 import { useBudCore } from '../context/BudCoreContext';
+import { formatPlural, PLURAL_WORKERS } from '../utils/formatters';
 
 export const WorkersPage: React.FC = () => {
   const {
@@ -67,13 +68,13 @@ export const WorkersPage: React.FC = () => {
             Pracownicy i obecności na budowach
           </h2>
           <p className="text-xs sm:text-sm text-slate-500 mt-0.5">
-            Zarządzaj kadrą {workers.length} wykwalifikowanych pracowników i monitoruj frekwencję
+            Zarządzaj kadrą {formatPlural(workers.length, PLURAL_WORKERS)} i monitoruj frekwencję
           </p>
         </div>
 
         <button
           onClick={() => setIsNewWorkerModalOpen(true)}
-          className="flex items-center gap-2 px-4 py-2.5 bg-amber-500 hover:bg-amber-600 text-slate-950 font-bold text-xs sm:text-sm rounded-xl shadow-sm shadow-amber-500/20 active:scale-98 transition-all cursor-pointer self-start sm:self-auto"
+          className="flex items-center gap-2 px-4 py-2.5 bg-amber-500 hover:bg-amber-600 text-slate-950 font-bold text-xs sm:text-sm rounded-xl shadow-sm shadow-amber-500/20 active:scale-98 transition-all cursor-pointer self-start sm:self-auto whitespace-nowrap"
         >
           <Plus className="w-4 h-4 stroke-[2.5]" />
           <span>Dodaj pracownika</span>
@@ -113,7 +114,7 @@ export const WorkersPage: React.FC = () => {
               onChange={(e) => setSelectedProjectId(e.target.value)}
               className="px-2.5 py-1.5 bg-slate-50 border border-slate-200 rounded-lg text-xs font-semibold text-slate-800 focus:outline-none focus:border-amber-500"
             >
-              <option value="all">Wszystkie budowy</option>
+              <option value="all">Wszystkie budowy (4)</option>
               {projects.map((p) => (
                 <option key={p.id} value={p.id}>
                   {p.name}
@@ -163,14 +164,14 @@ export const WorkersPage: React.FC = () => {
                 <th className="py-3 px-4">Zawód & Doświadczenie</th>
                 <th className="py-3 px-4">Przypisany plac budowy</th>
                 <th className="py-3 px-4">Telefon</th>
-                <th className="py-3 px-4 text-right">Stawka godzinowa</th>
-                <th className="py-3 px-4 text-center">Status obecności dzisiaj</th>
+                <th className="py-3 px-4 text-right whitespace-nowrap">Stawka godzinowa</th>
+                <th className="py-3 px-4 text-center whitespace-nowrap">Status obecności dzisiaj</th>
               </tr>
             </thead>
             <tbody className="divide-y divide-slate-100 text-slate-800">
               {filteredWorkers.map((worker) => (
                 <tr key={worker.id} className="hover:bg-slate-50 transition-colors">
-                  <td className="py-3.5 px-4 font-bold text-slate-900">
+                  <td className="py-3.5 px-4 font-bold text-slate-900 whitespace-nowrap">
                     <div className="flex items-center gap-2.5">
                       <div className="w-8 h-8 rounded-full bg-slate-800 text-amber-400 font-bold text-xs flex items-center justify-center shrink-0">
                         {worker.name
@@ -193,16 +194,16 @@ export const WorkersPage: React.FC = () => {
                     <span className="font-medium text-slate-700">{worker.projectName}</span>
                   </td>
 
-                  <td className="py-3.5 px-4 text-slate-600 font-mono text-xs">{worker.phone}</td>
+                  <td className="py-3.5 px-4 text-slate-600 font-mono text-xs whitespace-nowrap">{worker.phone}</td>
 
-                  <td className="py-3.5 px-4 text-right font-bold text-slate-900">
+                  <td className="py-3.5 px-4 text-right font-bold text-slate-900 whitespace-nowrap">
                     {worker.hourlyRate} zł/h
                   </td>
 
-                  <td className="py-3.5 px-4 text-center">
+                  <td className="py-3.5 px-4 text-center whitespace-nowrap">
                     <button
                       onClick={() => toggleWorkerAttendance(worker.id)}
-                      className={`inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-bold transition-all cursor-pointer ${
+                      className={`inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-bold transition-all cursor-pointer whitespace-nowrap ${
                         worker.presentToday
                           ? 'bg-emerald-100 text-emerald-800 hover:bg-emerald-200 border border-emerald-300/80 shadow-xs'
                           : 'bg-rose-50 text-rose-700 hover:bg-rose-100 border border-rose-200 shadow-xs'

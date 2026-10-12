@@ -1134,7 +1134,7 @@ export const initialTasks: Task[] = [
 export const initialDailyReports: DailyReport[] = [
   {
     id: 'rep-1',
-    date: '2026-10-10',
+    date: '2026-10-12',
     projectId: 'proj-1',
     projectName: 'Biurowiec Mokotów',
     siteManager: 'Tomasz Nowak',
@@ -1162,7 +1162,7 @@ export const initialDailyReports: DailyReport[] = [
   },
   {
     id: 'rep-2',
-    date: '2026-10-10',
+    date: '2026-10-12',
     projectId: 'proj-2',
     projectName: 'Centrum logistyczne Wrocław',
     siteManager: 'Anna Kowalczyk',
@@ -1189,7 +1189,7 @@ export const initialDailyReports: DailyReport[] = [
   },
   {
     id: 'rep-3',
-    date: '2026-10-09',
+    date: '2026-10-11',
     projectId: 'proj-3',
     projectName: 'Osiedle Zielone Tarasy',
     siteManager: 'Piotr Wiśniewski',
@@ -1215,7 +1215,7 @@ export const initialDailyReports: DailyReport[] = [
   },
   {
     id: 'rep-4',
-    date: '2026-10-09',
+    date: '2026-10-11',
     projectId: 'proj-4',
     projectName: 'Remont kamienicy',
     siteManager: 'Marek Zieliński',
@@ -1242,7 +1242,7 @@ export const initialDailyReports: DailyReport[] = [
   },
   {
     id: 'rep-5',
-    date: '2026-10-08',
+    date: '2026-10-10',
     projectId: 'proj-1',
     projectName: 'Biurowiec Mokotów',
     siteManager: 'Tomasz Nowak',
@@ -1268,7 +1268,7 @@ export const initialDailyReports: DailyReport[] = [
   },
   {
     id: 'rep-6',
-    date: '2026-10-07',
+    date: '2026-10-09',
     projectId: 'proj-2',
     projectName: 'Centrum logistyczne Wrocław',
     siteManager: 'Anna Kowalczyk',
@@ -1294,7 +1294,7 @@ export const initialDailyReports: DailyReport[] = [
   },
   {
     id: 'rep-7',
-    date: '2026-10-06',
+    date: '2026-10-08',
     projectId: 'proj-3',
     projectName: 'Osiedle Zielone Tarasy',
     siteManager: 'Piotr Wiśniewski',
@@ -1321,7 +1321,7 @@ export const initialDailyReports: DailyReport[] = [
   },
   {
     id: 'rep-8',
-    date: '2026-10-05',
+    date: '2026-10-07',
     projectId: 'proj-4',
     projectName: 'Remont kamienicy',
     siteManager: 'Marek Zieliński',
@@ -1477,7 +1477,7 @@ export const initialDocuments: DocumentItem[] = [
     date: '2025-02-28',
     fileSize: '12.4 MB',
     fileType: 'PDF',
-    uploadedBy: 'Zarząd BudCore',
+    uploadedBy: 'Zarząd FB Bartłomiej Kleczkowski',
   },
   {
     id: 'doc-3',
@@ -1543,7 +1543,7 @@ export const initialDocuments: DocumentItem[] = [
     date: '2026-10-01',
     fileSize: '8.9 MB',
     fileType: 'PDF',
-    uploadedBy: 'Księgowość BudCore',
+    uploadedBy: 'Księgowość FB Bartłomiej Kleczkowski Szczecin',
   },
 ];
 
@@ -1553,7 +1553,7 @@ export const initialActivities: ActivityItem[] = [
     type: 'report',
     title: 'Złożono raport dzienny',
     description: 'Tomasz Nowak złożył raport dla: Biurowiec Mokotów (11 pracowników, 14 podwykonawców)',
-    timestamp: '2026-10-10T16:30:00',
+    timestamp: '2026-10-12T16:30:00',
     relativeTime: '25 min temu',
     projectId: 'proj-1',
   },
@@ -1562,7 +1562,7 @@ export const initialActivities: ActivityItem[] = [
     type: 'order',
     title: 'Zatwierdzono zamówienie ZAM/2026/089',
     description: 'Stal zbrojeniowa B500SP (12 t) na kwotę 50 400 zł zaakceptowana do dostawy',
-    timestamp: '2026-10-10T15:45:00',
+    timestamp: '2026-10-12T15:45:00',
     relativeTime: '1 godz. temu',
     projectId: 'proj-1',
   },
@@ -1571,7 +1571,7 @@ export const initialActivities: ActivityItem[] = [
     type: 'worker',
     title: 'Zaktualizowano obecność załogi',
     description: 'Odnotowano 34 obecnych pracowników z 38 zatrudnionych na 4 budowach',
-    timestamp: '2026-10-10T14:15:00',
+    timestamp: '2026-10-12T14:15:00',
     relativeTime: '2 godz. temu',
   },
   {
@@ -1579,7 +1579,7 @@ export const initialActivities: ActivityItem[] = [
     type: 'expense',
     title: 'Zarejestrowano wydatek materiałowy',
     description: 'Faktura FV/2026/10/041 na kwotę 32 400 zł za beton C25/30',
-    timestamp: '2026-10-10T12:00:00',
+    timestamp: '2026-10-12T12:00:00',
     relativeTime: '4 godz. temu',
     projectId: 'proj-1',
   },
@@ -1588,7 +1588,7 @@ export const initialActivities: ActivityItem[] = [
     type: 'task',
     title: 'Ukończono zadanie krytyczne',
     description: 'Tadeusz Chmielewski zakończył: Izolacja przeciwwilgociowa fundamentów',
-    timestamp: '2026-10-10T09:20:00',
+    timestamp: '2026-10-12T09:20:00',
     relativeTime: '7 godz. temu',
     projectId: 'proj-3',
   },

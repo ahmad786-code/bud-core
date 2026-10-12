@@ -218,15 +218,15 @@ export const ProjectsPage: React.FC = () => {
                 <div className="grid grid-cols-3 gap-2 px-5 py-3 bg-slate-50/70 border-b border-slate-100 text-xs">
                   <div>
                     <span className="text-[11px] text-slate-500 block">Budżet</span>
-                    <strong className="text-slate-900">{formatCurrency(project.budget)}</strong>
+                    <strong className="text-slate-900 whitespace-nowrap">{formatCurrency(project.budget)}</strong>
                   </div>
                   <div>
                     <span className="text-[11px] text-slate-500 block">Wydano</span>
-                    <strong className="text-slate-700">{formatCurrency(project.spent)}</strong>
+                    <strong className="text-slate-700 whitespace-nowrap">{formatCurrency(project.spent)}</strong>
                   </div>
                   <div>
                     <span className="text-[11px] text-slate-500 block">Pozostało</span>
-                    <strong className="text-emerald-700">{formatCurrency(remaining)}</strong>
+                    <strong className="text-emerald-700 whitespace-nowrap">{formatCurrency(remaining)}</strong>
                   </div>
                 </div>
 
@@ -272,11 +272,11 @@ export const ProjectsPage: React.FC = () => {
                   <th className="py-3 px-4">Typ & Klient</th>
                   <th className="py-3 px-4">Kierownik</th>
                   <th className="py-3 px-4">Postęp</th>
-                  <th className="py-3 px-4 text-right">Budżet</th>
-                  <th className="py-3 px-4 text-right">Wydano</th>
-                  <th className="py-3 px-4 text-right">Pozostało</th>
-                  <th className="py-3 px-4 text-center">Status</th>
-                  <th className="py-3 px-4 text-right">Akcja</th>
+                  <th className="py-3 px-4 text-right whitespace-nowrap">Budżet</th>
+                  <th className="py-3 px-4 text-right whitespace-nowrap">Wydano</th>
+                  <th className="py-3 px-4 text-right whitespace-nowrap">Pozostało</th>
+                  <th className="py-3 px-4 text-center whitespace-nowrap">Status</th>
+                  <th className="py-3 px-4 text-right whitespace-nowrap">Akcja</th>
                 </tr>
               </thead>
               <tbody className="divide-y divide-slate-100 text-slate-800">
@@ -292,8 +292,8 @@ export const ProjectsPage: React.FC = () => {
                       <span className="font-medium text-slate-800">{p.type}</span>
                       <p className="text-[11px] text-slate-500">{p.client}</p>
                     </td>
-                    <td className="py-3.5 px-4 font-medium text-slate-800">{p.manager}</td>
-                    <td className="py-3.5 px-4">
+                    <td className="py-3.5 px-4 font-medium text-slate-800 whitespace-nowrap">{p.manager}</td>
+                    <td className="py-3.5 px-4 whitespace-nowrap">
                       <div className="flex items-center gap-2">
                         <div className="w-16 bg-slate-200 h-2 rounded-full overflow-hidden">
                           <div
@@ -304,18 +304,18 @@ export const ProjectsPage: React.FC = () => {
                         <span className="font-semibold text-xs">{p.progress}%</span>
                       </div>
                     </td>
-                    <td className="py-3.5 px-4 text-right font-medium">{formatCurrency(p.budget)}</td>
-                    <td className="py-3.5 px-4 text-right">{formatCurrency(p.spent)}</td>
-                    <td className="py-3.5 px-4 text-right font-bold text-emerald-700">
+                    <td className="py-3.5 px-4 text-right font-medium whitespace-nowrap">{formatCurrency(p.budget)}</td>
+                    <td className="py-3.5 px-4 text-right whitespace-nowrap">{formatCurrency(p.spent)}</td>
+                    <td className="py-3.5 px-4 text-right font-bold text-emerald-700 whitespace-nowrap">
                       {formatCurrency(p.budget - p.spent)}
                     </td>
-                    <td className="py-3.5 px-4 text-center">
+                    <td className="py-3.5 px-4 text-center whitespace-nowrap">
                       <StatusBadge status={p.status} />
                     </td>
-                    <td className="py-3.5 px-4 text-right">
+                    <td className="py-3.5 px-4 text-right whitespace-nowrap">
                       <Link
                         to={`/projekty/${p.id}`}
-                        className="px-2.5 py-1 text-xs font-semibold bg-slate-100 hover:bg-slate-200 rounded-md text-slate-800"
+                        className="px-2.5 py-1 text-xs font-semibold bg-slate-100 hover:bg-slate-200 rounded-md text-slate-800 whitespace-nowrap"
                       >
                         Otwórz
                       </Link>

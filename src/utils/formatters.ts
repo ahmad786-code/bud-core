@@ -1,6 +1,92 @@
 import { ProjectStatus, TaskPriority, OrderStatus } from '../types';
 
 /**
+ * Polish plural helper:
+ * 1 = one (np. "załączone zdjęcie", "pracownik", "osoba", "zadanie", "raport")
+ * 2-4, 22-24, 32-34... (except 12-14) = few (np. "załączone zdjęcia", "pracownicy", "osoby", "zadania", "raporty")
+ * 0, 5-21, 25-31... = many (np. "załączonych zdjęć", "pracowników", "osób", "zadań", "raportów")
+ */
+export function pluralize(
+  count: number,
+  [one, few, many]: [string, string, string]
+): string {
+  const abs = Math.abs(count);
+  if (abs === 1) {
+    return one;
+  }
+  const mod10 = abs % 10;
+  const mod100 = abs % 100;
+  if (mod10 >= 2 && mod10 <= 4 && (mod100 < 12 || mod100 > 14)) {
+    return few;
+  }
+  return many;
+}
+
+export function formatPlural(
+  count: number,
+  forms: [string, string, string]
+): string {
+  return `${count} ${pluralize(count, forms)}`;
+}
+
+// Preset forms for convenient imports:
+export const PLURAL_PHOTOS: [string, string, string] = [
+  'załączone zdjęcie',
+  'załączone zdjęcia',
+  'załączonych zdjęć',
+];
+export const PLURAL_PHOTOS_SHORT: [string, string, string] = [
+  'zdjęcie',
+  'zdjęcia',
+  'zdjęć',
+];
+export const PLURAL_WORKERS: [string, string, string] = [
+  'pracownik',
+  'pracownicy',
+  'pracowników',
+];
+export const PLURAL_PERSONS: [string, string, string] = [
+  'osoba',
+  'osoby',
+  'osób',
+];
+export const PLURAL_TASKS: [string, string, string] = [
+  'zadanie',
+  'zadania',
+  'zadań',
+];
+export const PLURAL_REPORTS: [string, string, string] = [
+  'raport',
+  'raporty',
+  'raportów',
+];
+export const PLURAL_SITES: [string, string, string] = [
+  'budowa',
+  'budowy',
+  'budów',
+];
+export const PLURAL_FIRMS: [string, string, string] = [
+  'firma',
+  'firmy',
+  'firm',
+];
+export const PLURAL_MATERIALS: [string, string, string] = [
+  'pozycja materiałowa',
+  'pozycje materiałowe',
+  'pozycji materiałowych',
+];
+export const PLURAL_EXPENSES: [string, string, string] = [
+  'wydatek',
+  'wydatki',
+  'wydatków',
+];
+export const PLURAL_DOCUMENTS: [string, string, string] = [
+  'dokument',
+  'dokumenty',
+  'dokumentów',
+];
+
+/**
  * Format currency in Polish locale: "1 250 000 zł"
  */
 export function formatCurrency(amount: number): string {
@@ -8,6 +94,49 @@ export function formatCurrency(amount: number): string {
     maximumFractionDigits: 0,
   }).format(amount);
   return `${formatted} zł`;
+}
+
+/**
+ * Format compact currency in Polish standard: "12,44 mln zł", "1,1 mln zł", "850 tys. zł"
+ */
+export function formatCompactCurrency(amount: number): string {
+  if (amount >= 1_000_000) {
+    const millions = amount / 1_000_000;
+    const formatted = millions.toLocaleString('pl-PL', {
+      maximumFractionDigits: 2,
+    });
+    return `${formatted} mln zł`;
+  }
+  if (amount >= 10_000) {
+    const thousands = amount / 1_000;
+    const formatted = thousands.toLocaleString('pl-PL', {
+      maximumFractionDigits: 0,
+    });
+    return `${formatted} tys. zł`;
+  }
+  if (amount >= 1_000) {
+    const thousands = amount / 1_000;
+    const formatted = thousands.toLocaleString('pl-PL', {
+      maximumFractionDigits: 1,
+    });
+    return `${formatted} tys. zł`;
+  }
+  return `${amount} zł`;
+}
+
+/**
+ * Format compact numbers the Polish way: "1,1 mln", "6 mln", "850 tys."
+ */
+export function formatCompactNumber(value: number): string {
+  if (value >= 1_000_000) {
+    const millions = value / 1_000_000;
+    return `${millions.toLocaleString('pl-PL', { maximumFractionDigits: 2 })} mln`;
+  }
+  if (value >= 1_000) {
+    const thousands = value / 1_000;
+    return `${thousands.toLocaleString('pl-PL', { maximumFractionDigits: 1 })} tys.`;
+  }
+  return value.toLocaleString('pl-PL');
 }
 
 /**
@@ -30,6 +159,7 @@ export function formatDate(dateStr: string): string {
     return dateStr;
   }
 }
+
 
 /**
  * Format percentage: e.g. 68%

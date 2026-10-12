@@ -11,7 +11,13 @@ import {
   Upload,
 } from 'lucide-react';
 import { useBudCore } from '../../context/BudCoreContext';
-import { formatDate } from '../../utils/formatters';
+import {
+  formatDate,
+  formatPlural,
+  PLURAL_PHOTOS,
+  PLURAL_PERSONS,
+} from '../../utils/formatters';
+import { WeatherIcon } from '../common/WeatherBadge';
 
 export const DailyReportModal: React.FC = () => {
   const {
@@ -25,7 +31,7 @@ export const DailyReportModal: React.FC = () => {
 
   // Form state for creating a new report
   const [projectId, setProjectId] = useState(projects[0]?.id || 'proj-1');
-  const [date, setDate] = useState('2026-10-11');
+  const [date, setDate] = useState('2026-10-12');
   const [workersCount, setWorkersCount] = useState(10);
   const [subcontractorsCount, setSubcontractorsCount] = useState(8);
   const [weatherCondition, setWeatherCondition] = useState<
@@ -114,17 +120,24 @@ export const DailyReportModal: React.FC = () => {
               </div>
               <div>
                 <span className="text-xs text-slate-500 block">Załoga własna</span>
-                <span className="font-semibold text-slate-900">{report.workersOnSite} osób</span>
+                <span className="font-semibold text-slate-900">
+                  {formatPlural(report.workersOnSite, PLURAL_PERSONS)}
+                </span>
               </div>
               <div>
                 <span className="text-xs text-slate-500 block">Podwykonawcy</span>
-                <span className="font-semibold text-slate-900">{report.subcontractorsOnSite} osób</span>
+                <span className="font-semibold text-slate-900">
+                  {formatPlural(report.subcontractorsOnSite, PLURAL_PERSONS)}
+                </span>
               </div>
               <div>
                 <span className="text-xs text-slate-500 block">Warunki pogodowe</span>
-                <span className="font-semibold text-slate-900">
-                  {report.weather.condition}, {report.weather.temp}°C
-                </span>
+                <div className="flex items-center gap-1.5 mt-0.5">
+                  <WeatherIcon condition={report.weather.condition} className="w-4 h-4" />
+                  <span className="font-semibold text-slate-900">
+                    {report.weather.condition}, {report.weather.temp}°C
+                  </span>
+                </div>
               </div>
             </div>
 
@@ -174,7 +187,7 @@ export const DailyReportModal: React.FC = () => {
             <div className="space-y-2">
               <h4 className="font-bold text-slate-900 flex items-center gap-1.5">
                 <Image className="w-4 h-4 text-slate-600" />
-                Dokumentacja fotograficzna ({report.photos.length} zdjęć)
+                Dokumentacja fotograficzna ({formatPlural(report.photos.length, PLURAL_PHOTOS)})
               </h4>
               <div className="grid grid-cols-2 sm:grid-cols-3 gap-3">
                 {report.photos.map((photo) => (
@@ -277,7 +290,7 @@ export const DailyReportModal: React.FC = () => {
               <div>
                 <label className="block text-xs font-semibold text-slate-700 mb-1 flex items-center gap-1">
                   <Users className="w-3.5 h-3.5 text-slate-500" />
-                  Pracownicy BudCore
+                  Pracownicy FB Bartłomiej Kleczkowski
                 </label>
                 <input
                   type="number"
@@ -389,7 +402,7 @@ export const DailyReportModal: React.FC = () => {
             {/* Photos upload simulator */}
             <div>
               <label className="block text-xs font-semibold text-slate-700 mb-1">
-                Zdjęcia z budowy ({simulatedPhotos.length})
+                Zdjęcia z budowy ({formatPlural(simulatedPhotos.length, PLURAL_PHOTOS)})
               </label>
               <div className="flex items-center gap-3">
                 <button
@@ -412,7 +425,7 @@ export const DailyReportModal: React.FC = () => {
                   <span>Dodaj zdjęcie z aparatu/galerii</span>
                 </button>
                 <span className="text-xs text-slate-500">
-                  {simulatedPhotos.length} załączonych fotografii
+                  {formatPlural(simulatedPhotos.length, PLURAL_PHOTOS)}
                 </span>
               </div>
             </div>

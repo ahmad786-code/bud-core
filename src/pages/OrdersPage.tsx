@@ -120,7 +120,7 @@ export const OrdersPage: React.FC = () => {
             onChange={(e) => setSelectedProjectId(e.target.value)}
             className="px-2.5 py-1.5 bg-slate-50 border border-slate-200 rounded-lg text-xs font-semibold text-slate-800 focus:outline-none focus:border-amber-500"
           >
-            <option value="all">Wszystkie budowy</option>
+            <option value="all">Wszystkie budowy (4)</option>
             {projects.map((p) => (
               <option key={p.id} value={p.id}>
                 {p.name}
@@ -179,23 +179,23 @@ export const OrdersPage: React.FC = () => {
                     {order.projectName}
                   </td>
 
-                  <td className="py-3.5 px-4 text-right font-extrabold text-slate-900">
+                  <td className="py-3.5 px-4 text-right font-extrabold text-slate-900 whitespace-nowrap">
                     {formatCurrency(order.amount)}
                   </td>
 
-                  <td className="py-3.5 px-4 text-slate-600 font-medium">
-                    <div className="flex items-center gap-1.5">
+                  <td className="py-3.5 px-4 text-slate-600 font-medium whitespace-nowrap">
+                    <div className="flex items-center gap-1.5 whitespace-nowrap">
                       <Truck className="w-3.5 h-3.5 text-slate-400" />
                       <span>{formatDate(order.deliveryDate)}</span>
                     </div>
                   </td>
 
-                  <td className="py-3.5 px-4 text-center">
+                  <td className="py-3.5 px-4 text-center whitespace-nowrap">
                     <OrderStatusBadge status={order.status} />
                   </td>
 
                   {/* Actions column */}
-                  <td className="py-3.5 px-4 text-right">
+                  <td className="py-3.5 px-4 text-right whitespace-nowrap">
                     {order.status === 'Oczekuje na akceptację' && (
                       <div className="flex items-center justify-end gap-1.5">
                         <button

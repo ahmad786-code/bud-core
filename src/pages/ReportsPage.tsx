@@ -40,14 +40,14 @@ export const ReportsPage: React.FC = () => {
 
         <div className="flex items-center gap-2">
           <button
-            onClick={() => handleExportPDF('Zbiorczy Raport Operacyjny BudCore')}
+            onClick={() => handleExportPDF('Zbiorczy Raport Operacyjny FB Bartłomiej Kleczkowski Szczecin')}
             className="flex items-center gap-2 px-3.5 py-2 bg-slate-900 hover:bg-slate-800 text-white font-semibold text-xs sm:text-sm rounded-xl transition-all cursor-pointer"
           >
             <Download className="w-4 h-4" />
             <span>Pobierz PDF</span>
           </button>
           <button
-            onClick={() => handleExportXLS('Koszty i harmonogramy BudCore Q3-Q4')}
+            onClick={() => handleExportXLS('Koszty i harmonogramy FB Bartłomiej Kleczkowski Szczecin Q3-Q4')}
             className="flex items-center gap-2 px-3.5 py-2 bg-emerald-600 hover:bg-emerald-700 text-white font-semibold text-xs sm:text-sm rounded-xl transition-all cursor-pointer"
           >
             <FileSpreadsheet className="w-4 h-4" />

@@ -129,7 +129,7 @@ export const ExpensesPage: React.FC = () => {
                   stroke="#64748b"
                   fontSize={11}
                   tickLine={false}
-                  tickFormatter={(val) => `${(val / 1000).toFixed(0)}k`}
+                  tickFormatter={(val) => (val === 0 ? '0 zł' : `${Math.round(val / 1000)} tys. zł`)}
                 />
                 <Tooltip
                   formatter={(val: any) => [`${Number(val).toLocaleString('pl-PL')} zł`]}
@@ -201,7 +201,7 @@ export const ExpensesPage: React.FC = () => {
               onChange={(e) => setSelectedProjectId(e.target.value)}
               className="px-2.5 py-1.5 bg-slate-50 border border-slate-200 rounded-lg text-xs font-semibold text-slate-800 focus:outline-none focus:border-amber-500"
             >
-              <option value="all">Wszystkie budowy</option>
+              <option value="all">Wszystkie budowy (4)</option>
               {projects.map((p) => (
                 <option key={p.id} value={p.id}>
                   {p.name}
@@ -269,17 +269,17 @@ export const ExpensesPage: React.FC = () => {
 
                   <td className="py-3.5 px-4 text-slate-800">{exp.contractor}</td>
 
-                  <td className="py-3.5 px-4 font-mono text-slate-500 text-xs">{exp.invoiceNumber}</td>
+                  <td className="py-3.5 px-4 font-mono text-slate-500 text-xs whitespace-nowrap">{exp.invoiceNumber}</td>
 
-                  <td className="py-3.5 px-4 text-slate-600">{formatDate(exp.date)}</td>
+                  <td className="py-3.5 px-4 text-slate-600 whitespace-nowrap">{formatDate(exp.date)}</td>
 
-                  <td className="py-3.5 px-4 text-right font-extrabold text-slate-900">
+                  <td className="py-3.5 px-4 text-right font-extrabold text-slate-900 whitespace-nowrap">
                     {formatCurrency(exp.amount)}
                   </td>
 
-                  <td className="py-3.5 px-4 text-center">
+                  <td className="py-3.5 px-4 text-center whitespace-nowrap">
                     <span
-                      className={`text-xs px-2.5 py-0.5 rounded-full font-bold ${
+                      className={`text-xs px-2.5 py-0.5 rounded-full font-bold whitespace-nowrap ${
                         exp.status === 'Opłacone'
                           ? 'bg-emerald-100 text-emerald-800'
                           : exp.status === 'Zatwierdzone'

@@ -93,7 +93,7 @@ export const DocumentsPage: React.FC = () => {
               onChange={(e) => setSelectedProjectId(e.target.value)}
               className="px-2.5 py-1.5 bg-slate-50 border border-slate-200 rounded-lg text-xs font-semibold text-slate-800 focus:outline-none focus:border-amber-500"
             >
-              <option value="all">Wszystkie budowy</option>
+              <option value="all">Wszystkie budowy (4)</option>
               {projects.map((p) => (
                 <option key={p.id} value={p.id}>
                   {p.name}
@@ -124,10 +124,10 @@ export const DocumentsPage: React.FC = () => {
                 <th className="py-3 px-4">Nazwa dokumentu</th>
                 <th className="py-3 px-4">Kategoria</th>
                 <th className="py-3 px-4">Budowa</th>
-                <th className="py-3 px-4">Data dodania</th>
-                <th className="py-3 px-4">Rozmiar & Format</th>
-                <th className="py-3 px-4">Dodane przez</th>
-                <th className="py-3 px-4 text-right">Akcje</th>
+                <th className="py-3 px-4 whitespace-nowrap">Data dodania</th>
+                <th className="py-3 px-4 whitespace-nowrap">Rozmiar & Format</th>
+                <th className="py-3 px-4 whitespace-nowrap">Dodane przez</th>
+                <th className="py-3 px-4 text-right whitespace-nowrap">Akcje</th>
               </tr>
             </thead>
             <tbody className="divide-y divide-slate-100 text-slate-800">
@@ -143,23 +143,23 @@ export const DocumentsPage: React.FC = () => {
                   </td>
 
                   <td className="py-3.5 px-4">
-                    <span className="text-xs px-2.5 py-1 rounded-md bg-slate-100 text-slate-700 font-semibold">
+                    <span className="text-xs px-2.5 py-1 rounded-md bg-slate-100 text-slate-700 font-semibold whitespace-nowrap">
                       {doc.category}
                     </span>
                   </td>
 
                   <td className="py-3.5 px-4 font-medium text-slate-700">{doc.projectName}</td>
 
-                  <td className="py-3.5 px-4 text-slate-500 font-medium">{formatDate(doc.date)}</td>
+                  <td className="py-3.5 px-4 text-slate-500 font-medium whitespace-nowrap">{formatDate(doc.date)}</td>
 
-                  <td className="py-3.5 px-4 text-slate-600">
+                  <td className="py-3.5 px-4 text-slate-600 whitespace-nowrap">
                     <span className="font-semibold text-slate-900">{doc.fileType}</span>
                     <span className="text-slate-400 text-xs ml-1">({doc.fileSize})</span>
                   </td>
 
-                  <td className="py-3.5 px-4 text-slate-600">{doc.uploadedBy}</td>
+                  <td className="py-3.5 px-4 text-slate-600 whitespace-nowrap">{doc.uploadedBy}</td>
 
-                  <td className="py-3.5 px-4 text-right">
+                  <td className="py-3.5 px-4 text-right whitespace-nowrap">
                     <div className="flex items-center justify-end gap-1.5">
                       <button
                         onClick={() => showToast(`Otwieranie podglądu pliku: ${doc.title}`)}
