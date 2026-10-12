@@ -56,12 +56,21 @@ export const DashboardPage: React.FC = () => {
   const [chartType, setChartType] = useState<'comparison' | 'monthly'>('comparison');
 
   // Chart data for "Budżet vs Wydatki"
-  const projectComparisonData = projects.map((p) => ({
-    name: p.name.length > 18 ? p.name.slice(0, 16) + '...' : p.name,
-    Budżet: p.budget,
-    Wydano: p.spent,
-    Pozostało: Math.max(0, p.budget - p.spent),
-  }));
+  const projectComparisonData = projects.map((p) => {
+    let displayName = p.name;
+    if (p.id === 'proj-1') displayName = 'ul. Ku Słońcu';
+    else if (p.id === 'proj-2') displayName = 'Hala Goleniów';
+    else if (p.id === 'proj-3') displayName = 'Warszewo';
+    else if (p.id === 'proj-4') displayName = 'al. Wojska Polskiego';
+
+    return {
+      name: displayName,
+      fullName: p.name,
+      Budżet: p.budget,
+      Wydano: p.spent,
+      Pozostało: Math.max(0, p.budget - p.spent),
+    };
+  });
 
   return (
     <div className="space-y-6">
@@ -83,8 +92,11 @@ export const DashboardPage: React.FC = () => {
               Nadzór operacyjny • Dziś, {formatDate('2026-10-12')}
             </div>
             <h2 className="text-2xl sm:text-3xl font-extrabold tracking-tight text-white font-sans">
-              Centrum dowodzenia <span className="text-amber-500">FB Bartłomiej Kleczkowski Szczecin</span>
+              Centrum dowodzenia
             </h2>
+            <p className="text-sm sm:text-base font-semibold text-amber-400">
+              Firma Budowlana Bartłomiej Kleczkowski Szczecin
+            </p>
             <p className="text-sm text-slate-300 leading-relaxed">
               Zarządzasz równolegle <strong className="text-white">4 placami budowy</strong>. Wszystkie
               procesy: załoga na budowach, zapotrzebowanie materiałowe, dzienne meldunki i koszty
@@ -264,14 +276,14 @@ export const DashboardPage: React.FC = () => {
           <table className="w-full text-left text-xs sm:text-sm">
             <thead className="bg-slate-50/80 text-slate-500 text-[11px] font-bold uppercase tracking-wider border-b border-slate-200/80">
               <tr>
-                <th className="py-3 px-4">Projekt i adres</th>
-                <th className="py-3 px-4">Kierownik budowy</th>
-                <th className="py-3 px-4">Postęp prac i wydatki</th>
-                <th className="py-3 px-4 text-right whitespace-nowrap">Budżet całkowity</th>
-                <th className="py-3 px-4 text-right whitespace-nowrap">Wydano</th>
-                <th className="py-3 px-4 text-right whitespace-nowrap">Pozostało</th>
-                <th className="py-3 px-4 text-center whitespace-nowrap">Status</th>
-                <th className="py-3 px-4 text-right whitespace-nowrap">Akcja</th>
+                <th className="py-3 px-2.5 sm:px-3">Projekt i adres</th>
+                <th className="py-3 px-2 sm:px-2.5 whitespace-nowrap">Kierownik budowy</th>
+                <th className="py-3 px-2 sm:px-2.5 min-w-[150px]">Postęp prac i wydatki</th>
+                <th className="py-3 px-2 sm:px-2.5 text-right whitespace-nowrap">Budżet całkowity</th>
+                <th className="py-3 px-2 sm:px-2.5 text-right whitespace-nowrap">Wydano</th>
+                <th className="py-3 px-2 sm:px-2.5 text-right whitespace-nowrap">Pozostało</th>
+                <th className="py-3 px-1.5 sm:px-2 text-center whitespace-nowrap">Status</th>
+                <th className="py-3 px-2 sm:px-2.5 text-right whitespace-nowrap">Akcja</th>
               </tr>
             </thead>
             <tbody className="divide-y divide-slate-100 text-slate-800">
@@ -285,32 +297,32 @@ export const DashboardPage: React.FC = () => {
 
                 return (
                   <tr key={proj.id} className="hover:bg-slate-50/70 transition-colors">
-                    <td className="py-3.5 px-4">
+                    <td className="py-3 px-2.5 sm:px-3 max-w-[210px] xl:max-w-[240px]">
                       <div>
                         <Link
                           to={`/projekty/${proj.id}`}
-                          className="font-bold text-slate-900 hover:text-amber-600 transition-colors"
+                          className="font-bold text-slate-900 hover:text-amber-600 transition-colors leading-snug block"
                         >
                           {proj.name}
                         </Link>
-                        <p className="text-[11px] text-slate-500">{proj.address}</p>
+                        <p className="text-[11px] text-slate-500 leading-tight mt-0.5">{proj.address}</p>
                       </div>
                     </td>
 
-                    <td className="py-3.5 px-4 whitespace-nowrap">
-                      <div className="flex items-center gap-2">
-                        <div className="w-7 h-7 rounded-full bg-slate-800 text-amber-400 font-bold text-xs flex items-center justify-center shrink-0">
+                    <td className="py-3 px-2 sm:px-2.5 whitespace-nowrap">
+                      <div className="flex items-center gap-1.5">
+                        <div className="w-6 h-6 rounded-full bg-slate-800 text-amber-400 font-bold text-[11px] flex items-center justify-center shrink-0">
                           {managerInitials}
                         </div>
                         <span className="font-medium text-slate-900">{proj.manager}</span>
                       </div>
                     </td>
 
-                    <td className="py-3.5 px-4 min-w-[160px]">
+                    <td className="py-3 px-2 sm:px-2.5 min-w-[150px]">
                       <div>
-                        <div className="flex items-center justify-between text-xs font-semibold mb-1 whitespace-nowrap">
-                          <span className="text-slate-700">Realizacja: {proj.progress}%</span>
-                          <span className="text-slate-500 text-[11px] font-normal">
+                        <div className="flex items-center justify-between gap-2.5 text-xs font-semibold mb-1">
+                          <span className="text-slate-700 whitespace-nowrap">Realizacja: {proj.progress}%</span>
+                          <span className="text-slate-500 text-[11px] font-normal whitespace-nowrap">
                             Wydano {spentPercent}%
                           </span>
                         </div>
@@ -329,23 +341,23 @@ export const DashboardPage: React.FC = () => {
                       </div>
                     </td>
 
-                    <td className="py-3.5 px-4 text-right font-semibold text-slate-900 whitespace-nowrap">
+                    <td className="py-3 px-2 sm:px-2.5 text-right font-semibold text-slate-900 whitespace-nowrap">
                       {formatCurrency(proj.budget)}
                     </td>
 
-                    <td className="py-3.5 px-4 text-right font-medium text-slate-700 whitespace-nowrap">
+                    <td className="py-3 px-2 sm:px-2.5 text-right font-medium text-slate-700 whitespace-nowrap">
                       {formatCurrency(proj.spent)}
                     </td>
 
-                    <td className="py-3.5 px-4 text-right font-bold text-emerald-700 whitespace-nowrap">
+                    <td className="py-3 px-2 sm:px-2.5 text-right font-bold text-emerald-700 whitespace-nowrap">
                       {formatCurrency(remaining)}
                     </td>
 
-                    <td className="py-3.5 px-4 text-center whitespace-nowrap">
+                    <td className="py-3 px-1.5 sm:px-2 text-center whitespace-nowrap">
                       <StatusBadge status={proj.status} />
                     </td>
 
-                    <td className="py-3.5 px-4 text-right whitespace-nowrap">
+                    <td className="py-3 px-2 sm:px-2.5 text-right whitespace-nowrap">
                       <Link
                         to={`/projekty/${proj.id}`}
                         className="inline-flex items-center gap-1 px-2.5 py-1 text-xs font-semibold text-slate-700 bg-slate-100 hover:bg-amber-50 hover:text-amber-700 hover:border-amber-300 border border-slate-200 rounded-md transition-all whitespace-nowrap"
@@ -411,7 +423,7 @@ export const DashboardPage: React.FC = () => {
                 <BarChart
                   data={projectComparisonData}
                   layout="horizontal"
-                  margin={{ top: 0, right: 10, left: 10, bottom: 0 }}
+                  margin={{ top: 10, right: 10, left: 10, bottom: 0 }}
                 >
                   <CartesianGrid strokeDasharray="3 3" vertical={false} stroke="#f1f5f9" />
                   <XAxis
@@ -426,12 +438,14 @@ export const DashboardPage: React.FC = () => {
                     fontSize={11}
                     tickLine={false}
                     axisLine={{ stroke: '#e2e8f0' }}
+                    width={72}
+                    ticks={[0, 1000000, 2000000, 3000000, 4000000, 5000000]}
+                    domain={[0, 5000000]}
                     tickFormatter={(val) => {
                       if (val === 0) return '0 zł';
-                      const m = val / 1_000_000;
-                      return `${m.toLocaleString('pl-PL', { maximumFractionDigits: 1 })} mln zł`;
+                      const m = Math.round(val / 1_000_000);
+                      return `${m} mln zł`;
                     }}
-                    domain={[0, 5000000]}
                   />
                   <Tooltip
                     formatter={(value: any) => [`${Number(value).toLocaleString('pl-PL')} zł`]}
@@ -456,7 +470,7 @@ export const DashboardPage: React.FC = () => {
               <ResponsiveContainer width="100%" height="100%">
                 <AreaChart
                   data={monthlyExpensesData}
-                  margin={{ top: 5, right: 10, left: 10, bottom: 5 }}
+                  margin={{ top: 10, right: 10, left: 10, bottom: 5 }}
                 >
                   <defs>
                     <linearGradient id="colorSpent" x1="0" y1="0" x2="0" y2="1">
@@ -477,6 +491,7 @@ export const DashboardPage: React.FC = () => {
                     fontSize={11}
                     tickLine={false}
                     axisLine={{ stroke: '#e2e8f0' }}
+                    width={72}
                     tickFormatter={(val) => {
                       if (val === 0) return '0 zł';
                       if (val >= 1_000_000) {

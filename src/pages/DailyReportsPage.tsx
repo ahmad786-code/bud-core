@@ -141,16 +141,16 @@ export const DailyReportsPage: React.FC = () => {
               </div>
 
               {/* Workers count badge */}
-              <div className="flex items-center gap-2 text-xs text-slate-600 bg-slate-50 p-2.5 rounded-lg border border-slate-100">
+              <div className="flex items-center gap-2 text-xs text-slate-600 bg-slate-50 p-2.5 rounded-lg border border-slate-100 whitespace-nowrap overflow-hidden">
                 <Users className="w-4 h-4 text-slate-500 shrink-0" />
-                <span>
-                  Pracownicy FB Bartłomiej Kleczkowski: <strong className="text-slate-900">{report.workersOnSite}</strong>
+                <span className="whitespace-nowrap">
+                  Własni pracownicy: <strong className="text-slate-900">{report.workersOnSite}</strong>
                 </span>
                 <span className="text-slate-300">|</span>
-                <span>
+                <span className="whitespace-nowrap">
                   Podwykonawcy: <strong className="text-slate-900">{report.subcontractorsOnSite}</strong>
                 </span>
-                <span className="ml-auto text-slate-400 font-semibold">
+                <span className="ml-auto text-slate-400 font-semibold whitespace-nowrap">
                   Suma: {formatPlural(report.workersOnSite + report.subcontractorsOnSite, PLURAL_PERSONS)}
                 </span>
               </div>

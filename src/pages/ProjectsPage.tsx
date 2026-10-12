@@ -20,22 +20,23 @@ import { StatusBadge } from '../components/common/StatusBadge';
 
 export const ProjectsPage: React.FC = () => {
   const { projects, globalSearch } = useBudCore();
-  const [activeFilter, setActiveFilter] = useState<'Wszystkie' | ProjectStatus>('Wszystkie');
+  const [activeFilter, setActiveFilter] = useState<string>('all');
   const [localSearch, setLocalSearch] = useState('');
   const [viewMode, setViewMode] = useState<'grid' | 'list'>('grid');
 
-  const filterTabs: ('Wszystkie' | ProjectStatus)[] = [
-    'Wszystkie',
-    'Zgodnie z planem',
-    'Zagrożony',
-    'Opóźniony',
-    'Zakończony',
+  const filterTabs = [
+    { id: 'all', label: 'Wszystkie', status: null as ProjectStatus | null },
+    { id: 'on_track', label: 'Zgodnie z planem', status: 'Zgodnie z planem' as ProjectStatus },
+    { id: 'at_risk', label: 'Zagrożone', status: 'Zagrożony' as ProjectStatus },
+    { id: 'delayed', label: 'Opóźnione', status: 'Opóźniony' as ProjectStatus },
+    { id: 'completed', label: 'Zakończone', status: 'Zakończony' as ProjectStatus },
   ];
 
   const filteredProjects = useMemo(() => {
     return projects.filter((p) => {
       // Status filter
-      if (activeFilter !== 'Wszystkie' && p.status !== activeFilter) {
+      const currentTab = filterTabs.find((t) => t.id === activeFilter);
+      if (currentTab?.status && p.status !== currentTab.status) {
         return false;
       }
       // Search term (combine globalSearch or localSearch)
@@ -96,24 +97,23 @@ export const ProjectsPage: React.FC = () => {
         {/* Status segmented tabs */}
         <div className="flex items-center gap-1 overflow-x-auto pb-1 sm:pb-0">
           {filterTabs.map((tab) => {
-            const count =
-              tab === 'Wszystkie'
-                ? projects.length
-                : projects.filter((p) => p.status === tab).length;
+            const count = tab.status
+              ? projects.filter((p) => p.status === tab.status).length
+              : projects.length;
 
             return (
               <button
-                key={tab}
-                onClick={() => setActiveFilter(tab)}
+                key={tab.id}
+                onClick={() => setActiveFilter(tab.id)}
                 className={`px-3 py-1.5 text-xs font-semibold rounded-lg transition-all whitespace-nowrap cursor-pointer ${
-                  activeFilter === tab
+                  activeFilter === tab.id
                     ? 'bg-slate-900 text-white shadow-xs'
                     : 'text-slate-600 hover:bg-slate-100 hover:text-slate-900'
                 }`}
               >
-                <span>{tab}</span>
+                <span>{tab.label}</span>
                 <span className={`ml-1.5 px-1.5 py-0.2 rounded-full text-[10px] ${
-                  activeFilter === tab ? 'bg-slate-800 text-amber-400' : 'bg-slate-200 text-slate-600'
+                  activeFilter === tab.id ? 'bg-slate-800 text-amber-400' : 'bg-slate-200 text-slate-600'
                 }`}>
                   {count}
                 </span>

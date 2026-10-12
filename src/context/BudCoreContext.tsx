@@ -138,7 +138,7 @@ export const BudCoreProvider: React.FC<{ children: ReactNode }> = ({ children })
     {
       id: 'notif-1',
       title: 'Opóźnienie w dostawie stali',
-      message: 'Dostawa dla budowy Wrocław ma 2 dni opóźnienia.',
+      message: 'Dostawa dla budowy Hala Goleniów ma 2 dni opóźnienia.',
       time: '10 min temu',
       read: false,
       type: 'alert',
@@ -146,7 +146,7 @@ export const BudCoreProvider: React.FC<{ children: ReactNode }> = ({ children })
     {
       id: 'notif-2',
       title: 'Nowy raport dzienny',
-      message: 'Tomasz Nowak złożył raport dla Biurowca Mokotów.',
+      message: 'Tomasz Nowak złożył raport dla: Budynek wielorodzinny, ul. Ku Słońcu.',
       time: '25 min temu',
       read: false,
       type: 'info',

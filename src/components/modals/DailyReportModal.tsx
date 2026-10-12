@@ -290,7 +290,7 @@ export const DailyReportModal: React.FC = () => {
               <div>
                 <label className="block text-xs font-semibold text-slate-700 mb-1 flex items-center gap-1">
                   <Users className="w-3.5 h-3.5 text-slate-500" />
-                  Pracownicy FB Bartłomiej Kleczkowski
+                  Własni pracownicy
                 </label>
                 <input
                   type="number"
